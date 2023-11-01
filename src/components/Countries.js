@@ -4,7 +4,11 @@ import Card from "./Card";
 
 const Countries = () => {
   const [data, setData] = useState([]);
+  //   ce state permet de récupérer la valeur du range et de l'afficher dans le return de Countries
+  //   .slice(0, rangeValue) permet de récupérer les données de l'API en fonction de la valeur du range
+  const [rangeValue, setRangeValue] = useState(36);
 
+  //  ce useEffect permet de récupérer les données de l'API et de les stocker dans le state data et de les afficher dans le return de Countries
   useEffect(() => {
     axios
       .get("https://restcountries.com/v3.1/all")
@@ -12,9 +16,17 @@ const Countries = () => {
   }, []);
   return (
     <div className="countries">
-      <h1>Countries</h1>
+      <ul className="radio-container">
+        <input
+          type="range"
+          min="1"
+          max="250"
+          defaultValue={rangeValue}
+          onChange={(e) => setRangeValue(e.target.value)}
+        />
+      </ul>
       <ul>
-        {data.map((country, index) => (
+        {data.slice(0, rangeValue).map((country, index) => (
           <Card key={index} country={country} />
         ))}
       </ul>

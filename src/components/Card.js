@@ -1,5 +1,6 @@
 import React from "react";
 
+// ce compsant est un enfant de Countries et reçoit les props country et les affiche dans le return de country
 const Card = ({ country }) => {
   return (
     <li className="card">
